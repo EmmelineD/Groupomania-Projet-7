@@ -22,6 +22,7 @@ Utiliser un terminal pour le back et un terminal pour le front.
 ## FrontEnd :
 - axios
 - React 18.2.0
+- react-router-dom
 - @mui/material @emotion/react @emotion/styled @mui/icons-material
 
 Dans le dossier "public" puis "assets", ajouter deux dossiers : "person" dans lequel vous ajouter les images de profile 1.jpg jusqu'à 10.jpg 
