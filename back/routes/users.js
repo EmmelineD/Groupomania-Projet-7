@@ -49,8 +49,9 @@ router.get("/:id", async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
 
+/*
 //follow a user
 router.put("/:id/follow", async (req, res) => {
     if (req.body.userId !== req.params.id) {
@@ -92,5 +93,6 @@ router.put("/:id/unfollow", async (req, res) => {
       res.status(403).json("you cant unfollow yourself");
     }
 });
+*/
 
 module.exports = router
