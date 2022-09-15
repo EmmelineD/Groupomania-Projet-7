@@ -13,13 +13,14 @@ import { AuthContext, ContextProvider } from "./context/AuthContext";
 
 function App() {
   const { user } = useContext(AuthContext);
+  console.log({user})
   return (
     <ContextProvider>
     <Router>
       <Routes>
         <Route exact path="/" element={user ? <Home/> : <Login/>}/>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login/>} />
-        <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup/>}/>
+        <Route path="/signup" element={user ? <Navigate to="/profile/:username" /> : <Signup/>}/>
         <Route path="/profile/:username" element= {<Profile/>}/>
       </Routes>
     </Router>

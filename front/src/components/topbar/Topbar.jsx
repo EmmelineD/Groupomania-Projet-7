@@ -1,12 +1,30 @@
 import "./topbar.css";
 import React from "react";
 import { Search, Message, Notifications, Logout } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { LogoutContext } from "../../context/LogoutContext";
+import { logoutCall } from "../../apiCalls";
 
 export default function Topbar() {
+    const { user } = useContext(AuthContext);
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const {isFetching, dispatch} = useContext(LogoutContext);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        logoutCall(
+          {user},
+          dispatch
+        );
+      };
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
-                <span className="logo">Groupomania</span>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                    <span className="logo">Groupomania</span>
+                </Link>
             </div>
             <div className="topbarCenter">
                 <div className="searchBar">
@@ -28,10 +46,20 @@ export default function Topbar() {
                         <span className="topbarIconBadge">1</span>
                     </div>
                     <div className="topbarIconItem">
-                        <Logout/>
+                        <button onClick={handleClick} disabled={isFetching}><Logout/></button>
                     </div>
                 </div>
-                <img src="/assets/person/1.jpg" alt="" className="topbarImg"/>
+                <Link to={`/profile/${user.username}`}>
+                    <img
+                        src={
+                            user.profilePicture
+                            ? PF + user.profilePicture
+                            : PF + "person/noAvatar.png"
+                            }
+                        alt=""
+                         className="topbarImg"
+                    />
+                </Link>
             </div>
         </div>
     )

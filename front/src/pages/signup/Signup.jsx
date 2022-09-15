@@ -2,7 +2,7 @@ import "./signup.css";
 import Logo from "../../images/logo.png";
 import { useRef } from "react";
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
+import axios from '../../api/axios';
 
 const cursorPointer = {
     cursor: "pointer"
@@ -27,7 +27,7 @@ export default function Signup() {
       };
       try {
         await axios.post("/api/auth/signup", user);
-        navigate.push("/login");
+        navigate("/login");
       } catch (err) {
         console.log(err);
       }
