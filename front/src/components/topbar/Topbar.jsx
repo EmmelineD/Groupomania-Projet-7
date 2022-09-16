@@ -4,20 +4,13 @@ import { Search, Message, Notifications, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { LogoutContext } from "../../context/LogoutContext";
-import { logoutCall } from "../../apiCalls";
 
 export default function Topbar() {
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    const {isFetching, dispatch} = useContext(LogoutContext);
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        logoutCall(
-          {user},
-          dispatch
-        );
+    const handleClick =() => {
+        localStorage.removeItem("user");
       };
     return (
         <div className="topbarContainer">
@@ -46,7 +39,7 @@ export default function Topbar() {
                         <span className="topbarIconBadge">1</span>
                     </div>
                     <div className="topbarIconItem">
-                        <button onClick={handleClick} disabled={isFetching}><Logout/></button>
+                        <button onClick={handleClick}><Logout/></button>
                     </div>
                 </div>
                 <Link to={`/profile/${user.username}`}>
