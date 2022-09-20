@@ -11,7 +11,9 @@ export default function Topbar() {
 
     const handleClick =() => {
         localStorage.removeItem("user");
+        window.location.reload();  // fix tempo
       };
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">

@@ -5,8 +5,6 @@ import {Link} from "react-router-dom";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 
-// dispatch is not a function react context -> recherche sur google
-
 const cursorPointer = {
     cursor: "pointer"
   };
@@ -20,8 +18,10 @@ export default function Login() {
     e.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
-      dispatch
+      dispatch,
+      ()=>{window.location.reload()} //fix tempo
     );
+      
   };
 
   return (

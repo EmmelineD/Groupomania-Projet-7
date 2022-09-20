@@ -8,11 +8,16 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext, AuthContextProvider } from "./context/AuthContext";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  let { user } = useContext(AuthContext);
+
+  useEffect(()=>{
+    console.log({newUserApp: user})
+  },[user])
+  
   return (
     <AuthContextProvider>
     <Router>
