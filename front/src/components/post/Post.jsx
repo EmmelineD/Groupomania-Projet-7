@@ -12,14 +12,29 @@ export default function Post({post}) {
     const { user: currentUser } = useContext(AuthContext);
     const PF = REACT_APP_PUBLIC_FOLDER;
 
-    const [like,setLike] = useState(post.like)
-    const [dislike,setDislike] = useState(post.dislike)
+    const [like,setLike] = useState(0)
+    const [dislike,setDislike] = useState(0)
     const [isLiked,setIsLiked] = useState(false)
     const [isDisliked,setIsDisliked] = useState(false)
 
     useEffect(() => {
-        setIsLiked(post.likes.includes(currentUser._id));
+      //setIsLiked(post.likes.includes(currentUser._id));
+      setLike(post.likes.length);
       }, [currentUser._id, post.likes]);
+
+      useEffect(() => {
+        //setIsLiked(post.likes.includes(currentUser._id));
+        setDislike(post.dislikes.length);
+        }, [currentUser._id, post.dislikes]);
+
+        useEffect(() => {
+          //setIsLiked(post.likes.includes(currentUser._id));
+          setIsLiked(post.likes.includes(currentUser._id));
+          }, [currentUser._id, post.likes]);
+          useEffect(() => {
+            //setIsLiked(post.likes.includes(currentUser._id));
+            setIsDisliked(post.dislikes.includes(currentUser._id));
+            }, [currentUser._id, post.dislikes]);
     
       useEffect(() => {
         const fetchUser = async () => {
