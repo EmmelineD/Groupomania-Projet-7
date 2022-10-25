@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
+import { REACT_APP_PUBLIC_FOLDER } from "../../variables";
+
 export default function Topbar() {
     const { user } = useContext(AuthContext);
-    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const PF = REACT_APP_PUBLIC_FOLDER;
 
     const handleClick =() => {
         localStorage.removeItem("user");
@@ -49,7 +51,7 @@ export default function Topbar() {
                         src={
                             user.profilePicture
                             ? PF + user.profilePicture
-                            : PF + "person/noAvatar.png"
+                            : PF + "person/no-avatar.png"
                             }
                         alt=""
                          className="topbarImg"
