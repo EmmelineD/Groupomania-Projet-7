@@ -14,25 +14,21 @@ export default function Post({post}) {
 
     const [like,setLike] = useState(0)
     const [dislike,setDislike] = useState(0)
-    const [isLiked,setIsLiked] = useState(false)
-    const [isDisliked,setIsDisliked] = useState(false)
+    const [isLiked,setIsLiked] = useState(0)
+    const [isDisliked,setIsDisliked] = useState(0)
 
     useEffect(() => {
-      //setIsLiked(post.likes.includes(currentUser._id));
       setLike(post.likes.length);
       }, [currentUser._id, post.likes]);
 
       useEffect(() => {
-        //setIsLiked(post.likes.includes(currentUser._id));
         setDislike(post.dislikes.length);
         }, [currentUser._id, post.dislikes]);
 
         useEffect(() => {
-          //setIsLiked(post.likes.includes(currentUser._id));
           setIsLiked(post.likes.includes(currentUser._id));
           }, [currentUser._id, post.likes]);
           useEffect(() => {
-            //setIsLiked(post.likes.includes(currentUser._id));
             setIsDisliked(post.dislikes.includes(currentUser._id));
             }, [currentUser._id, post.dislikes]);
     
@@ -44,34 +40,41 @@ export default function Post({post}) {
         fetchUser();
       }, [post.userId]);
     
-    const likeHandler = ()=>{
-        if(isLiked){
-            setIsLiked(false)
-            setLike(like-1)
-        }else{
-            setIsLiked(true)
-            setLike(like+1)
-            if(isDisliked){
-                setIsDisliked(false)
-                setLike(like+1)
-                setDislike(dislike-1)
-            }
-        }
-    }
-    const dislikeHandler = ()=>{
+    const likeHandler = () => {
+      try {
+        axios.put("/api/posts/" + post._id + "/like", { userId: currentUser._id });
+      } catch (err) {}
+      if(isLiked){
+        setIsLiked(false)
+        setLike(like-1)
+      }else{
+        setIsLiked(true)
+        setLike(like+1)
         if(isDisliked){
             setIsDisliked(false)
+            setLike(like+1)
             setDislike(dislike-1)
-        }else{
-            setIsDisliked(true)
-            setDislike(dislike+1)
-            if(isLiked){
-                setIsLiked(false)
-                setDislike(dislike+1)
-                setLike(like-1)
-            }
         }
+      }
     }
+
+    const dislikeHandler = ()=>{
+      try {
+        axios.put("/api/posts/" + post._id + "/dislike", { userId: currentUser._id });
+      } catch (err) {}
+      if(isDisliked){
+          setIsDisliked(false)
+          setDislike(dislike-1)
+        }else{
+          setIsDisliked(true)
+          setDislike(dislike+1)
+          if(isLiked){
+              setIsLiked(false)
+              setDislike(dislike+1)
+              setLike(like-1)
+          }
+        }
+      }
 
   return (
     <div className="post">
