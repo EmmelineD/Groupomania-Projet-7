@@ -15,8 +15,6 @@ export default function Feed({ username }) {
       data.append("userId","632472286ad00ce9daa5d429");
       const res = username
         ? await axios.get("/api/posts/profile/" + username)
-        //: await axios.get("/api/posts/timeline/" + user._id);
-        //: await axios.post("/api/posts/timeline/all", {userId:"632472286ad00ce9daa5d429"});
         : await axios.get("/api/posts/timeline/all");
       setPosts(
         res.data.sort((p1, p2) => {

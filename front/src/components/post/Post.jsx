@@ -4,13 +4,14 @@ import axios from '../../api/axios';
 import {useContext, useEffect, useState} from "react" ;
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { REACT_APP_PUBLIC_FOLDER } from "../../variables";
+import { REACT_APP_PUBLIC_FOLDER, BACK_IMAGES } from "../../variables";
 
 export default function Post({post}) {
 
     const [user, setUser] = useState({});
     const { user: currentUser } = useContext(AuthContext);
     const PF = REACT_APP_PUBLIC_FOLDER;
+    const BI = BACK_IMAGES;
 
     const [like,setLike] = useState(0)
     const [dislike,setDislike] = useState(0)
@@ -86,7 +87,7 @@ export default function Post({post}) {
                 className="postProfileImg"
                 src={
                   user.profilePicture
-                    ? PF + user.profilePicture
+                    ? BI + user.profilePicture
                     : PF + "person/no-avatar.png"
                 }
                 alt=""
@@ -101,7 +102,7 @@ export default function Post({post}) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + post.img} alt="" />
+          <img className="postImg" src={BI + post.img} alt="" />
         </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
