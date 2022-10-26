@@ -15,7 +15,6 @@ function App() {
   let { user } = useContext(AuthContext);
 
   useEffect(()=>{
-    console.log({newUserApp: user})
   },[user])
   
   return (

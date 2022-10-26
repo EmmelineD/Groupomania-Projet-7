@@ -1,5 +1,5 @@
 import "./post.css";
-import {MoreVert, ThumbUp, ThumbDown} from "@mui/icons-material";
+import {MoreVert, ThumbUp, ThumbDown, ModeEdit, Delete} from "@mui/icons-material";
 import axios from '../../api/axios';
 import {useContext, useEffect, useState} from "react" ;
 import { Link } from "react-router-dom";
@@ -109,6 +109,8 @@ export default function Post({post}) {
                     <span className="likeIconBadge">{like}</span>
                     <ThumbDown className="likeIcon" onClick={dislikeHandler}/>
                     <span className="likeIconBadge">{dislike}</span>
+                    <ModeEdit className="likeIcon" /**onClick={likeHandler}**//>
+                    <Delete className="likeIcon" /**onClick={likeHandler}**//>
                 </div>
                 <div className="postBottomRight">
                     <span className="postCommentText">{post.comment} commentaires</span>
